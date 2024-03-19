@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .valid {
+         border: 5px solid green;
+    }
+    .invalid {
+        border: 4px solid red;
+    }
+    </style>
+</head>
+<body>
+    <input type="text" id="textInput" placeholder="Введите ссылку или email">
+    <input type="text" id="emailInput" placeholder="Введите email">
+    <script>
+        const textInput = document.getElementById('textInput');
+        const emailInput = document.getElementById('emailInput');
+
+        textInput.addEventListener('input', function() {
+            const value = this.value.trim();
+            if (isValidURL(value)) {
+                this.classList.remove('invalid');
+                this.classList.add('valid');
+            } else {
+                this.classList.remove('valid');
+                this.classList.add('invalid');
+            }
+        });
+
+        emailInput.addEventListener('input', function() {
+            const value = this.value.trim();
+            if (isValidEmail(value)) {
+                this.classList.remove('invalid');
+                this.classList.add('valid');
+            } else {
+                this.classList.remove('valid');
+                this.classList.add('invalid');
+            }
+        });
+
+        function isValidURL(url) {
+            const urlPattern = /^(https?:\/\/)?([\w.-]+)\.([a-zA-Z]{2,})(\/[\w.-]*)*\/?$/;
+            return urlPattern.test(url);
+        }
+
+        function isValidEmail(email) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+    </script>
+
+
+    <script src="./script.js"></script>
+</body>
+</html>
